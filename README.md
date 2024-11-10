@@ -64,3 +64,55 @@ Now, you are ready to use the tailwindcss for your project.
 
 
 ## Advance setup and custom colors
+
+1. Create a token.json file at the root directory of the project. Now you can add screen sizes and colors into that file.
+
+```json
+{
+  "screens": {
+    "sm": "480px",
+    "md": "768px",
+    "lg": "976px",
+    "xl": "1440px"
+  },
+  "colors": {
+    "tplPrimary": "#ff0000",
+    "tplSecondary": "#0000ff"
+  }
+}
+```
+
+2. Next, import that `token.json` file into `tailwind.config.js` file. Update the `tailwindo.config.js` file with the following code snippets.
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+const colors = require('./token.json').colors;
+const screens = require('./token.json').screens;
+module.exports = {
+  content: ["./*.html"],
+  theme: {
+    extend: {
+      screens: {
+        ...screens
+      },
+      colors: {
+        ...colors
+      }
+    },
+  },
+  plugins: [],
+}
+```
+
+3. Keep running the `npm run dev` command and now you can use the custom colors to your html file. Here is the examples.
+
+**Background color**
+
+```html
+<div class="bg-tplPrimary">Hello world</div>
+```
+**Text color**
+
+```html
+<p class="text-tplPrimary">Hello world</p>
+```
